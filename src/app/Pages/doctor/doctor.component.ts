@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MasterService } from '../../Services/master.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -7,6 +7,7 @@ import { LoginComponent } from '../login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
 import { HotToastService } from '@ngneat/hot-toast';
+import { response } from 'express';
 
 @Component({
   selector: 'app-doctor',
@@ -17,7 +18,7 @@ import { HotToastService } from '@ngneat/hot-toast';
   providers: [MasterService]
 
 })
-export class DoctorComponent {
+export class DoctorComponent implements OnInit {
   constructor(private _master: MasterService, private toast: HotToastService) { }
   userDetails: any;
   loading: boolean = false;
@@ -30,31 +31,79 @@ export class DoctorComponent {
     "appointmentDate": "",
     "appointmentTime": "",
     "email": "",
-    "doctor": "",
+    "doctar": "",
     "specialities": "",
   }
 
-  doctor = [
+  doctorsList: { doctorName: string, specialties: string[] }[] = [
     {
-      name: "Dr Ashok Gupta",
+      doctorName: "Dr. John Doe",
+      specialties: [
+        "Cardiology",
+        "Internal Medicine",
+        "Preventive Medicine"
+      ]
     },
     {
-      name: "Dr Aman Khan",
+      doctorName: "Dr. Jane Smith",
+      specialties: [
+        "Pediatrics",
+        "Adolescent Medicine",
+        "Neonatology"
+      ]
     },
     {
-      name: "Dr Anjali Sharma"
+      doctorName: "Dr. Emily Johnson",
+      specialties: [
+        "Orthopedics",
+        "Sports Medicine",
+        "Rehabilitation"
+      ]
     },
     {
-      name: "Dr Vasim Ansari",
+      doctorName: "Dr. Michael Brown",
+      specialties: [
+        "Dermatology",
+        "Cosmetic Dermatology",
+        "Pediatric Dermatology"
+      ]
     },
     {
-      name: "Dr Sarita"
+      doctorName: "Dr. Sarah Davis",
+      specialties: [
+        "Neurology",
+        "Neurophysiology",
+        "Epilepsy"
+      ]
+    },
+    {
+      doctorName: "Dr. William Martinez",
+      specialties: [
+        "Psychiatry",
+        "Child and Adolescent Psychiatry",
+        "Forensic Psychiatry"
+      ]
+    },
+    {
+      doctorName: "Dr. Patricia Wilson",
+      specialties: [
+        "Gastroenterology",
+        "Hepatology",
+        "Endoscopy"
+      ]
     }
-  ]
+  ];
+  
+  allSpecialties: string[] = [];
   inputValue: any;
+  doctorName: any;
+  
   ChangeHandler(event: any) {
-    this.inputValue = event?.target?.value;
-    console.log("inputValue ::>>", this.inputValue);
+    if (event.target.name === "doctar") {
+      this.doctorName = event.target.value;
+      const queryObject = this.doctorsList.find((item) => item.doctorName === this.doctorName);
+      this.allSpecialties = queryObject ? queryObject.specialties : [];
+    }
   }
 
   saveAppointment(): void {
@@ -101,5 +150,22 @@ export class DoctorComponent {
         console.error('Error fetching data', error);
       }
     )
+  }
+
+  ngOnInit(): void {
+    this.getAppointments();
+  }
+  
+  appointmentlist: any;
+  getAppointments() {
+    this._master.getAppointmentList().subscribe(
+      response => {
+        this.appointmentlist = response;
+        console.log("appointmentlist ::>>", this.appointmentlist);
+      },
+      error => {
+        console.error('Error fetching appointments:', error);
+      }
+    );
   }
 }
