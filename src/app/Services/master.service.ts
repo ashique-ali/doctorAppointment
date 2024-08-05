@@ -23,6 +23,11 @@ export class MasterService {
   bookAppointment(bookData: any): Observable<any> {
     return this.http.post<any>(`${this.baseURL}`, bookData);
   }
+
+  appointmentUrl = "http://localhost:5000/api/getAllApointment";
+  getAppointmentList(): Observable<any> {
+    return this.http.get<any>(`${this.appointmentUrl}`);
+  }
 }
 
 
