@@ -1,0 +1,146 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-12 d-flex justify-content-between align-items-center">
+            <h5>Add New Doctor</h5>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDoctor">
+                <span>
+                    <i class="fa fa-plus"></i>
+                </span>
+                Add New
+            </button>
+        </div>
+        <div class="container mt-3 bg-white shadow p-4 rounded rounded-3">
+            <h5>All Doctors (1)</h5>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Doctor Name</th>
+                        <th class="text-center" scope="col">Email</th>
+                        <th class="text-center" scope="col">Specialties</th>
+                        <th class="text-center" scope="col">View</th>
+                        <th class="text-center" scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-custom">
+                        <td>Test Doctor</td>
+                        <td class="text-center">doctorom</td>
+                        <td class="text-center">Accident and emergen</td>
+                        <td class="text-center"><button
+                                class="btn btn-info btn-sm m-auto w-75  d-flex align-items-baseline gap-1 justify-content-center"><i
+                                    class="fa fa-eye"></i>View</button></td>
+                        <td class="d-flex justify-content-center">
+                            <button
+                                class="btn m-0 btn-primary btn-sm d-flex align-items-baseline gap-1 justify-content-center m-auto"
+                                style="width: 40%"><i class="fa fa-pencil"></i>Edit</button>
+                            <button
+                                class="btn m-0 btn-danger btn-sm  d-flex align-items-baseline gap-1 justify-content-center m-auto"
+                                style="width: 40%;"><i class="fa fa-trash-o"></i>Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addDoctor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Book Your Appointment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row bg-white rounded rounded-3">
+                        <div class="col-lg-12 col-md-6 col-sm-12">
+                            <form>
+                                <div class="d-flex gap-3">
+                                    <div class="form-group w-50">
+                                        <label>Enter Name<span class="text-danger fw-bold">*</span></label>
+                                        <input type="text" placeholder="Enter Name" name="name"
+                                            [(ngModel)]="bookAppointment.name" class="form-control" />
+                                    </div>
+                                    <div class="form-group w-50">
+                                        <label>Enter Mobile<span class="text-danger fw-bold">*</span></label>
+                                        <input type="text" placeholder="Enter Mobile No" name="mobileNo"
+                                            [(ngModel)]="bookAppointment.mobileNo" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <div class="form-group w-50 mt-3">
+                                        <label>Enter City<span class="text-danger fw-bold">*</span></label>
+                                        <input type="text" placeholder="Enter City" name="city"
+                                            [(ngModel)]="bookAppointment.city" class="form-control" />
+                                    </div>
+                                    <div class="form-group w-50 mt-3">
+                                        <label>Enter Age<span class="text-danger fw-bold">*</span></label>
+                                        <input type="text" placeholder="Enter Age" name="age"
+                                            [(ngModel)]="bookAppointment.age" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center gap-3 justify-content-between mt-3">
+                                    <div class="form-group w-50 col-lg-6 col-md-6 col-sm-12">
+                                        <label>Enter Email<span class="text-danger fw-bold">*</span></label>
+                                        <input type="email" class="form-control" placeholder="Enter Email" name="email"
+                                            [(ngModel)]="bookAppointment.email" />
+                                    </div>
+                                    <div class="d-flex w-50 gap-1 col-lg-6 flex-column col-md-6 col-sm-12 px-2">
+                                        <label>Gender<span class="text-danger fw-bold">*</span></label>
+                                        <div class="d-flex gap-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" id="male" value="male"
+                                                    name="gender" [(ngModel)]="bookAppointment.gender">
+                                                <label>Male</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" id="female" value="female"
+                                                    name="gender" [(ngModel)]="bookAppointment.gender">
+                                                <label>Female</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <div class="form-group w-50 mt-3">
+                                        <label>Enter Date<span class="text-danger fw-bold">*</span></label>
+                                        <input type="date" placeholder="Enter Date" name="appointmentDate"
+                                            [(ngModel)]="bookAppointment.appointmentDate" class="form-control" />
+                                    </div>
+                                    <div class="form-group w-50 mt-3">
+                                        <label>Enter Time<span class="text-danger fw-bold">*</span></label>
+                                        <input type="time" placeholder="Enter Appointment Time" name="appointmentTime"
+                                            [(ngModel)]="bookAppointment.appointmentTime" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <div class="form-group w-50 mt-3">
+                                        <label>Select Specialties<span class="text-danger fw-bold">*</span></label>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option>Fever</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group w-50 mt-3">
+                                        <label>Select Doctor<span class="text-danger fw-bold">*</span></label>
+                                        <select class="form-select" (change)="ChangeHandler($event)"
+                                            name="doctor" [(ngModel)]="bookAppointment.doctor" aria-label="Default select example">
+                                            <option selected>Select Doctor</option>
+                                            @for(item of doctor; track item.name) {
+                                            <option [value]="item.name">{{item.name}}</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" (click)="saveAppointment()">Book Appointment</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+.login__form {
+    background: #1e2442;
+    padding: 40px 0px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#eyeIcon {
+    position: absolute;
+    top: 70%;
+    right: 0;
+    transform: translate(-50%, -50%);
+}
