@@ -1,0 +1,64 @@
+<div class="containers">
+    <div class="logiform__row">
+        <div class="login__form">
+            <div class="col-lg-4 col-md-5 col-sm-12 bg-white p-4 rounded rounded-3">
+                <form #regData="ngForm" (ngSubmit)="fetchData()" novalidate>
+                    <h4 class="title text-center">Sign Up Form</h4>
+
+                    <div class="form_row mt-2">
+                        <label>First Name<span class="text-danger fw-bold">*</span></label>
+                        <input type="text" class="form-control" #firstName="ngModel" name="firstName"
+                            [(ngModel)]="userData.firstName" placeholder="First Name" required />
+                        <span *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || regData.submitted)"
+                              class="text-danger fw-bold">First Name is required</span>
+                    </div>
+
+                    <div class="form_row mt-2">
+                        <label>Last Name<span class="text-danger fw-bold">*</span></label>
+                        <input type="text" class="form-control" #lastName="ngModel" name="lastName"
+                            [(ngModel)]="userData.lastName" placeholder="Last Name" required />
+                        <span *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || regData.submitted)"
+                              class="text-danger fw-bold">Last Name is required</span>
+                    </div>
+
+                    <div class="form_row mt-2">
+                        <label>Email Address<span class="text-danger fw-bold">*</span></label>
+                        <input type="text" class="form-control" #email="ngModel" name="email"
+                            [(ngModel)]="userData.email" placeholder="Enter Email" required />
+                        <span *ngIf="email.invalid && (email.dirty || email.touched || regData.submitted)"
+                              class="text-danger fw-bold">Email is required</span>
+                    </div>
+
+                    <div class="form_row mt-2">
+                        <label>Mobile Number<span class="text-danger fw-bold">*</span></label>
+                        <input type="text" class="form-control" #contactNo="ngModel" name="contactNo"
+                            [(ngModel)]="userData.contactNo" placeholder="Mobile Number" required />
+                        <span *ngIf="contactNo.invalid && (contactNo.dirty || contactNo.touched || regData.submitted)"
+                              class="text-danger fw-bold">Mobile number is required</span>
+                    </div>
+
+                    <div class="form_row mt-2" style="position: relative;">
+                        <label>Password<span class="text-danger fw-bold">*</span></label>
+                        <input type="password" name="password" #password="ngModel" [(ngModel)]="userData.password"
+                            class="form-control" placeholder="Enter password" required />
+                        <span *ngIf="password.invalid && (password.dirty || password.touched || regData.submitted)"
+                              class="text-danger fw-bold">Password is required</span>
+                    </div>
+
+                    <div class="form_row mt-2" style="position: relative;">
+                        <label>Confirm Password<span class="text-danger fw-bold">*</span></label>
+                        <input type="password" class="form-control" placeholder="Confirm Password"
+                            name="confirmpassword" #confirmPassword="ngModel" [(ngModel)]="userData.confirmpassword"
+                            required />
+                        <span *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched || regData.submitted)"
+                              class="text-danger fw-bold">Confirm password is required</span>
+                    </div>
+
+                    <div class="login__Button mt-4">
+                        <button type="submit" class="btn btn-dark">{{ loading ? 'Please Wait...' : 'Sign Up' }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

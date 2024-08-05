@@ -1,0 +1,29 @@
+<section class="d-flex justify-content-between">
+    <nav class="sidebar shadow bg-white" style="min-height: 100vh;">
+        <div class="container-fluid">
+            <div class="collapse" id="navbarNavAltMarkup">
+               <div>
+                <div class="userLogo">
+                    <span><i class="fa fa-user"></i></span>
+                    </div>
+                    <p>Addmistration</p>
+               </div>
+                <div class="nav-links">
+                    <a class="nav-link" routerLink="register"></a>
+                    <a class="nav-link" routerLink="admin/dashboard">Dashboard</a>
+                    <a class="nav-link" routerLink="/admin/addDoctor">Doctor</a>
+                    <a class="nav-link">Schedule</a>
+                    <a class="nav-link" routerLink="/admin/appointmentList">Appointment</a>
+                    <a class="nav-link">Patients</a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5">
+        <button class="btn btn-danger" routerLink="">Log Out</button>
+        </div>
+    </nav>
+    
+    <div class="px-4" style="width: 80%">
+        <router-outlet></router-outlet>
+    </div>
+</section>

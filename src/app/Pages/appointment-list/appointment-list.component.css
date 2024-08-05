@@ -1,0 +1,12 @@
+.table-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.table-custom {
+    border-top: 1.5px solid #ddd; 
+}
+
+tr th {
+    font-size: 14px;
+}

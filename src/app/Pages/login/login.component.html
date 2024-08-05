@@ -1,0 +1,29 @@
+<div class="containers">
+    <div class="logiform__row">
+        <div class="login__form">
+            <div class="col-lg-4 col-md-5 col-sm-12 bg-white p-4 shadow rounded rounded-3">
+                <form>
+                    <h4 class="title text-center">Sign In Form</h4>
+                    <div class="form_row mt-3">
+                        <label>Email Address<span class="strickt">*</span></label>
+                        <input type="text" class="form-control" [(ngModel)]="signInData.username"
+                            placeholder="Enter email address" name="email">
+                    </div>
+                    <div class="form_row mt-3" style="position: relative;">
+                        <label>Password<span class="strickt">*</span></label>
+                        <input type="password" class="form-control" [(ngModel)]="signInData.password"
+                            placeholder="password" name="password">
+                    </div>
+                    <div class="login__Button mt-4">
+                        <input type="button" class="btn btn-dark" [value]="loading ? 'Please Wait...' : 'Sign In'"
+                            (click)="LoginForm()" />
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <span class="signup">Don't have an account? <a href="" routerLink="/register">Sign Up</a></span>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
