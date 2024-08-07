@@ -6,6 +6,7 @@ import { RegisterComponent } from './Pages/register/register.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { HeaderComponent } from './Pages/header/header.component';
 import { DoctorComponent } from './Pages/doctor/doctor.component';
+import { ScheduleComponent } from './Pages/schedule/schedule.component';
 
 export const routes: Routes = [
     {
@@ -17,8 +18,8 @@ export const routes: Routes = [
                 component: DashboardComponent
             },
             {
-                path: 'new',
-                component: NewAppointmentComponent
+                path: 'schedule',
+                component: ScheduleComponent
             },
             {
                 path: 'appointmentList',

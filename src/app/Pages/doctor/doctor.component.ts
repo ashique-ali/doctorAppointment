@@ -1,25 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MasterService } from '../../Services/master.service';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from '../login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
 import { HotToastService } from '@ngneat/hot-toast';
 import { response } from 'express';
+import { error } from 'console';
+import { ScheduleComponent } from '../schedule/schedule.component';
 
 @Component({
   selector: 'app-doctor',
   standalone: true,
-  imports: [FormsModule, RouterLinkActive, RouterLink, CommonModule, LoginComponent, HttpClientModule, HeaderComponent],
+  imports: [FormsModule, RouterLinkActive, RouterLink, CommonModule, LoginComponent, HttpClientModule, HeaderComponent, ScheduleComponent],
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.css',
   providers: [MasterService]
 
 })
 export class DoctorComponent implements OnInit {
-  constructor(private _master: MasterService, private toast: HotToastService) { }
+
+  constructor(private _master: MasterService, private toast: HotToastService, private route: ActivatedRoute,) { }
   userDetails: any;
   loading: boolean = false;
   bookAppointment: any = {
@@ -33,6 +36,8 @@ export class DoctorComponent implements OnInit {
     "email": "",
     "doctar": "",
     "specialities": "",
+    "fees": 100,
+    "deegree": "",
   }
 
   doctorsList: { doctorName: string, specialties: string[] }[] = [
@@ -93,11 +98,11 @@ export class DoctorComponent implements OnInit {
       ]
     }
   ];
-  
+
   allSpecialties: string[] = [];
   inputValue: any;
   doctorName: any;
-  
+
   ChangeHandler(event: any) {
     if (event.target.name === "doctar") {
       this.doctorName = event.target.value;
@@ -127,6 +132,7 @@ export class DoctorComponent implements OnInit {
             borderRadius: '5px'
           },
         });
+        window.location.reload();
         this.bookAppointment = "";
       },
       error => {
@@ -155,17 +161,91 @@ export class DoctorComponent implements OnInit {
   ngOnInit(): void {
     this.getAppointments();
   }
-  
+
   appointmentlist: any;
+  col = 6;
+  totalCount: any;
+  totalDoctor: any;
+
   getAppointments() {
     this._master.getAppointmentList().subscribe(
       response => {
         this.appointmentlist = response;
         console.log("appointmentlist ::>>", this.appointmentlist);
+        this.totalCount = response.length;
+        this.totalDoctor = response.length;
+        console.log("totalDoctor ::>>", this.totalDoctor, this.totalCount);
       },
       error => {
         console.error('Error fetching appointments:', error);
       }
     );
   }
+
+  deleteId: any;
+  setDeleteId(id: any) {
+    this.deleteId = id;
+  }
+
+  deleteHandler() {
+    this._master.getDelete(this.deleteId).subscribe(
+      response => {
+        this.toast.success('Item deleted successfully ...!', {
+          position: 'top-center',
+          duration: 3000,
+          style: {
+            width: 'fit-content',
+            padding: '10px',
+            marginTop: "20px",
+            margin: 'auto',
+            textAlign: "center",
+            backgroundColor: "green",
+            color: "white",
+            fontWeight: 500,
+            fontSize: "14px",
+            borderRadius: '5px'
+          },
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000)
+      },
+      error => {
+        console.log("Something went wrong ::>>", error);
+      }
+    );
+  }
+
+  // updateHandler(id: any) {
+  //   console.log("iddddddd", id);
+
+  //   this._master.getUpdate(id).subscribe(
+  //     response => {
+  //       console.log("Updated successfully ...!");
+  //     },
+  //     error => {
+  //       console.log("Error ::>", error);
+  //     }
+  //   )
+  // }
+
+  id: any;
+  updatedata: any;
+  email= "";
+  updateHandler(id: number) {
+    this._master.getDetailsById(id).subscribe(
+      (response: any) => {
+        const paramChain = this.route.snapshot.paramMap;
+        console.log("paramChain ::>>", paramChain);
+        console.log("Success: ", response);
+        this.doctorName = response.doctar;
+        this.email = response.email;
+      },
+      (error: any) => {
+        console.error("Error: ", error);
+      }
+    );
+  }
+
 }
+
