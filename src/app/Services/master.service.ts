@@ -19,20 +19,16 @@ export class MasterService {
     return this.http.post<any>(`${this.baseUrl}/auth/login`, loginData);
   }
 
-  baseURL = "http://localhost:5000/api/createAppointment";
+  baseURL = "http://localhost:5000/api/addDocator";
   bookAppointment(bookData: any): Observable<any> {
     return this.http.post<any>(`${this.baseURL}`, bookData);
   }
 
-  appointmentUrl = "http://localhost:5000/api/getAllApointment";
-  getAppointmentList(): Observable<any> {
+  appointmentUrl = "http://localhost:5000/api/getAllDoctors";
+  getAllDoctorsList(): Observable<any> {
     return this.http.get<any>(`${this.appointmentUrl}`);
   }
 
-  deleteUrl = "http://localhost:5000/api/deleteAppointment";
-  getDelete(id: any): Observable<any> {
-    return this.http.delete<any>(`${this.deleteUrl}/${id}`);
-  }
 
   updateUrl = "http://localhost:5000/api/UpdateAppointment";
   getUpdate(id: any): Observable<any> {
