@@ -28,3 +28,12 @@
     box-shadow: 1.5px 2.5px 3px #0f0980;
     border: 2px solid #0f0980;
 }
+
+.header {
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0px;
+    background: #fff;
+    z-index: 999;
+    box-shadow: 1px 0px 1px 2px #ddd;
+}

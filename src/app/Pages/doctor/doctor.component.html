@@ -19,24 +19,24 @@
                         <tr>
                             <th scope="col">Sr No</th>
                             <th scope="col">Doctor Name</th>
-                            <th class="text-center" scope="col">Email</th>
+                            <th class="text-center" scope="col">Qualification</th>
                             <th class="text-center" scope="col">Specialties</th>
                             <th class="text-center" scope="col">View</th>
                             <th class="text-center" scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @for(item of appointmentlist; track item.name; let i = $index) {
+                        @for(item of doctorList; track item.name; let i = $index) {
                         <tr class="table-custom">
                             <td>{{i+1}}</td>
-                            <td class="text-center">{{ item.doctar ? (item.doctar | titlecase) : "N/A" }}</td>
-                            <td class="text-center">{{item.email ? item.email : "N/A"}}</td>
+                            <td class="text-center">{{ item.name ? (item.name | titlecase) : "N/A" }}</td>
+                            <td class="text-center">{{item.Qualification ? item.Qualification : "N/A"}}</td>
                             <td class="text-center">{{item.specialities ? (item.specialities | titlecase) : "N/A"}}</td>
                             <td class="text-center">
                                 <button
                                     class="btn btn-success btn-sm m-auto d-flex align-items-baseline gap-1 justify-content-center"
                                     (click)="getAppointments()" data-bs-toggle="modal"
-                                    [attr.data-bs-target]="'#viewData'+item._id" style="width: 80%;">
+                                    [attr.data-bs-target]="'#viewData'+item._id">
                                     <i class="fa fa-eye"></i>View
                                 </button>
                                 <!-- Modal -->
@@ -53,25 +53,26 @@
                                                 <p><strong>Name :</strong>{{item.name | titlecase}}</p>
                                                 <p><strong>Email :</strong>{{item.email}}</p>
                                                 <p><strong>Mobile :</strong>{{item.mobileNo}}</p>
-                                                <p><strong>City :</strong>{{item.city | titlecase}}</p>
-                                                <p><strong>Age :</strong>{{item.age}}</p>
-                                                <p><strong>Doctor Name</strong>{{item.doctar ? item.doctar : "N/A"}}</p>
+                                                <p><strong>Qualification</strong>{{item.Qualification ? item.Qualification : "N/A"}}</p>
+                                                <p><strong>Fees :</strong>{{item.fees}}</p>
                                                 <p><strong>Specialties :</strong>{{item.specialities ? item.specialities
                                                     :
                                                     "N/A"}}</p>
+                                                    <p><strong>AppointmentDate :</strong>{{ item.appointmentDate ? (item.appointmentDate | date: 'longDate') : "N/A" }}</p>
+                                                    <p><strong>AppointmentTime :</strong>{{item.appointmentTime ? item.appointmentTime : "N/A"}}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="d-flex justify-content-center">
+                            <td class="d-flex justify-content-center gap-2">
                                 <button (click)="updateHandler(item._id)"
-                                    class="btn m-0 text-white btn-sm d-flex align-items-baseline gap-1 justify-content-center m-auto"
+                                    class="btn m-0 text-white btn-sm d-flex align-items-baseline gap-1 justify-content-center"
                                     data-bs-toggle="modal" data-bs-target="#addDoctor"
-                                    style="width: 40%; background: #0f0980;  "><i class="fa fa-pencil"></i>Edit</button>
-                                <button (click)="setDeleteId(item._id)"
-                                    class="btn m-0 btn-danger btn-sm  d-flex align-items-baseline gap-1 justify-content-center m-auto"
-                                    style="width: 48%;" data-bs-toggle="modal" data-bs-target="#deleteData"><i
+                                    style="background: #0f0980;  "><i class="fa fa-pencil"></i>Update</button>
+                                <button 
+                                    class="btn m-0 btn-danger btn-sm  d-flex align-items-baseline gap-1 justify-content-center"
+                                    data-bs-toggle="modal" data-bs-target="#deleteData"><i
                                         class="fa fa-trash-o"></i>Remove</button>
                                 <!-- Modal -->
                                 <div class="modal fade" id="deleteData" tabindex="-1"
@@ -87,7 +88,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                                    (click)="deleteHandler()">Delete</button>
+                                                    >Delete</button>
                                             </div>
                                         </div>
                                     </div>
@@ -124,26 +125,26 @@
                                 <div class="d-flex gap-3">
                                     <div class="form-group w-50">
                                         <label>Enter Name<span class="text-danger fw-bold">*</span></label>
-                                        <input type="text" placeholder="Enter Name" name="doctar"
-                                            [(ngModel)]="bookAppointment.doctar" value="{{doctorName}}"
+                                        <input type="text" placeholder="Enter Name" name="name"
+                                            [(ngModel)]="addDoctor.name" value="{{doctorName}}"
                                             class="form-control" />
                                     </div>
                                     <div class="form-group w-50">
                                         <label>Enter Mobile<span class="text-danger fw-bold">*</span></label>
                                         <input type="text" placeholder="Enter Mobile No" name="mobileNo"
-                                            [(ngModel)]="bookAppointment.mobileNo" class="form-control" />
+                                            [(ngModel)]="addDoctor.mobileNo" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="d-flex gap-3">
                                     <div class="form-group w-50 mt-3">
                                         <label>Enter Qualification<span class="text-danger fw-bold">*</span></label>
-                                        <input type="text" [(ngModel)]="bookAppointment.deegree" placeholder="Enter Qualification" name="deegree"
+                                        <input type="text" [(ngModel)]="addDoctor.Qualification" placeholder="Enter Qualification" name="Qualification"
                                             class="form-control" />
                                     </div>
                                     <div class="form-group w-50 mt-3">
                                         <label>Enter Age<span class="text-danger fw-bold">*</span></label>
                                         <input type="text" placeholder="Enter Age" name="age"
-                                            [(ngModel)]="bookAppointment.age" class="form-control" />
+                                            [(ngModel)]="addDoctor.age" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center gap-3 justify-content-between mt-3">
@@ -151,19 +152,19 @@
                                         <label>Enter Email<span class="text-danger fw-bold">*</span></label>
                                         <input type="email" class="form-control" value="{{email}}"
                                             placeholder="Enter Email" name="email"
-                                            [(ngModel)]="bookAppointment.email" />
+                                            [(ngModel)]="addDoctor.email" />
                                     </div>
                                     <div class="d-flex w-50 gap-1 col-lg-6 flex-column col-md-6 col-sm-12 px-2">
                                         <label>Gender<span class="text-danger fw-bold">*</span></label>
                                         <div class="d-flex gap-3">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" id="male" value="male"
-                                                    name="gender" [(ngModel)]="bookAppointment.gender">
+                                                    name="gender" [(ngModel)]="addDoctor.gender">
                                                 <label>Male</label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" id="female" value="female"
-                                                    name="gender" [(ngModel)]="bookAppointment.gender">
+                                                    name="gender" [(ngModel)]="addDoctor.gender">
                                                 <label>Female</label>
                                             </div>
                                         </div>
@@ -173,22 +174,22 @@
                                     <div class="form-group w-50 mt-3">
                                         <label>Enter Date<span class="text-danger fw-bold">*</span></label>
                                         <input type="date" placeholder="Enter Date" name="appointmentDate"
-                                            [(ngModel)]="bookAppointment.appointmentDate" class="form-control" />
+                                            [(ngModel)]="addDoctor.appointmentDate" class="form-control" />
                                     </div>
                                     <div class="form-group w-50 mt-3">
                                         <label>Enter Time<span class="text-danger fw-bold">*</span></label>
                                         <input type="time" placeholder="Enter Appointment Time" name="appointmentTime"
-                                            [(ngModel)]="bookAppointment.appointmentTime" class="form-control" />
+                                            [(ngModel)]="addDoctor.appointmentTime" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="d-flex gap-3 mt-3">
                                     <div class="form-group w-50">
                                         <label>Enter Specialties<span class="text-danger fw-bold">*</span></label>
-                                            <input type="text" class="form-control" name="specialities" [(ngModel)]="bookAppointment.specialities" placeholder="Enter Specialties" />
+                                            <input type="text" class="form-control" name="specialities" [(ngModel)]="addDoctor.specialities" placeholder="Enter Specialties" />
                                     </div>
                                     <div class="form-group w-50">
                                         <label>Enter Fees<span class="text-danger fw-bold">*</span></label>
-                                            <input type="text" class="form-control" [(ngModel)]="bookAppointment.fees" name="fees" placeholder="Enter Fees" />
+                                            <input type="text" class="form-control" [(ngModel)]="addDoctor.fees" name="fees" placeholder="Enter Fees" />
                                     </div>
                                 </div>
                             </form>

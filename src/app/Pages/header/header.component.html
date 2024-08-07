@@ -6,24 +6,24 @@
                 <div class="userLogo">
                     <span><i class="fa fa-user"></i></span>
                     </div>
-                    <p class="text-white">Addmistration</p>
+                    <p class="text-white mt-2">Addmistration</p>
                </div>
                 <div class="nav-links">
                     <a class="nav-link" routerLink="register"></a>
                     <a class="nav-link" routerLink="/admin/dashboard">Dashboard</a>
-                    <a class="nav-link" routerLink="/admin/addDoctor">Doctor</a>
+                    <a class="nav-link" routerLink="/admin/addDoctor">Add Doctor</a>
                     <a class="nav-link" routerLink="/admin/schedule">Schedule</a>
-                    <a class="nav-link" routerLink="/admin/appointmentList">Appointment</a>
+                    <a class="nav-link" routerLink="/admin/appointmentList">Create Appointment</a>
                     <a class="nav-link">Patients</a>
                 </div>
             </div>
         </div>
         <div class="mt-5">
-        <button class="btn btn-danger" routerLink="">Log Out</button>
+        <button class="btn btn-danger d-flex align-items-center gap-1 justify-content-center w-100" routerLink=""><span><i class="fa fa-sign-out"></i></span>Sign Out</button>
         </div>
     </nav>
     
-    <div style="width: 88%">
+    <div style="width: 85%">
         <router-outlet></router-outlet>
     </div>
 </section>
